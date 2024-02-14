@@ -17,6 +17,9 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    
+    @Autowired
+    private EmailService emailService;
 
     public Employee addEmployee(Employee employee) {
         Optional<Employee> existingEmployee = employeeRepository.findByEmail(employee.getEmail());
@@ -25,7 +28,24 @@ public class EmployeeService {
         }
         String id = UUID.randomUUID().toString().split("-")[0];
         employee.setId(id);
-        return employeeRepository.save(employee);
+        Employee savedEmployee = employeeRepository.save(employee);
+        
+        String managerEmail = null;
+        if (savedEmployee.getReportsTo() != null) {
+            Optional<Employee> managerOptional = employeeRepository.findById(savedEmployee.getReportsTo());
+            if (managerOptional.isPresent()) {
+                managerEmail = managerOptional.get().getEmail();
+            }
+        }
+        
+        if (managerEmail != null) {
+            String employeeName = savedEmployee.getEmployeeName();
+            String phoneNumber = savedEmployee.getPhoneNumber();
+            String emailId = savedEmployee.getEmail();
+            emailService.sendEmailToManager(managerEmail, employeeName, phoneNumber, emailId);
+        }
+
+        return savedEmployee;
     }
 
     public List<Employee> getAllEmployees() {
