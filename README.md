@@ -70,7 +70,7 @@ This project implements an Employee Management System using Spring Boot. It prov
    - Email Content: "<EmployeeName> will now work under you. Mobile number is <PhoneNumber> and email is <EmailId>".
 
 8. **Hosted Application**
-   - The application is hosted on a free platform at [https://employee-backend-production-5af8.up.railway.app/](https://employee-backend-production-5af8.up.railway.app/).
+   - The application is hosted on a free platform at [https://employee-backend-production-5af8.up.railway.app/employees](https://employee-backend-production-5af8.up.railway.app/employees).
 
 ## Additional Features
 - Validations and error handling are implemented for every API route.
