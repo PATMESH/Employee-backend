@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri : mongodb+srv://patmeshpatmesh2003:0WpbOXQJNGG7iURx@cluster0.wxmofd3.mongodb.net/?retryWrites=true&w=majority
+      database : Employees
